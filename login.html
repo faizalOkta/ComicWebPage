@@ -10,41 +10,30 @@
         header { background-color: #e62429; padding: 20px; font-size: 24px; }
         #okta-login-container { margin: 50px auto; width: 300px; }
     </style>
-    <script src="https://global.oktacdn.com/okta-signin-widget/7.0.0/js/okta-sign-in.min.js"></script>
-    <link rel="stylesheet" href="https://global.oktacdn.com/okta-signin-widget/7.0.0/css/okta-sign-in.min.css" />
+    <script src="https://global.oktacdn.com/okta-auth-js/7.2.0/okta-auth-js.min.js"></script>
 </head>
 <body>
     <header>Comic Universe - Login</header>
-    <div id="okta-login-container"></div>
+    <button id="login-btn">Login</button>
 
     <script>
-const signIn = new OktaSignIn({
-    baseUrl: "https://demo-aquamarine-wildfowl-94995.okta.com",
-    clientId: "0oapsfv2p3XXTP5o3697",
-    redirectUri: "https://comic-web-page-cii84teu2-faizaloktas-projects.vercel.app/login.html",
-    authParams: {
-        issuer: "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default",
-        responseType: ['code', 'id_token'], // Change from ['token', 'id_token'] to ['code', 'id_token']
-        pkce: true, // Ensure PKCE is enabled
-        scopes: ['openid', 'profile', 'email']
-    }
-});
+        const authClient = new OktaAuth({
+            issuer: "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default",
+            clientId: "0oapsfv2p3XXTP5o3697",
+            redirectUri: "https://comic-web-page-cii84teu2-faizaloktas-projects.vercel.app/login.html",
+            pkce: true,
+            scopes: ['openid', 'profile', 'email']
+        });
 
-
-
-
-        signIn.renderEl(
-            { el: '#okta-login-container' },
-            function success(res) {
-                if (res.status === 'SUCCESS') {
-                    console.log('User successfully authenticated', res);
-                    window.location.href = 'https://dXXXXXXXXX.cloudfront.net/index.html'; // Redirect to home after login
-                }
-            },
-            function error(err) {
-                console.error(err);
+        document.getElementById("login-btn").addEventListener("click", async () => {
+            try {
+                await authClient.token.getWithRedirect({
+                    responseType: ['code', 'id_token']
+                });
+            } catch (err) {
+                console.error("Login failed", err);
             }
-        );
+        });
     </script>
 </body>
 </html>
