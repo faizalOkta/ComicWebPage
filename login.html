@@ -21,15 +21,16 @@
     </div>
 
     <script>
-        function redirectToOkta() {
-            window.location.href = "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default/v1/authorize?" +
-                "client_id=0oapsfv2p3XXTP5o3697" +
-                "&response_type=code" +
-                "&scope=openid profile email" +
-                "&redirect_uri=https://comic-page.vercel.app/callback" +
-                "&state=randomState123" +
-                "&nonce=randomNonce123";
-        }
-    </script>
+    function redirectToOkta() {
+        window.location.href = "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default/v1/authorize?" +
+            "client_id=0oapsfv2p3XXTP5o3697" +
+            "&response_type=code" +
+            "&scope=openid profile email" +
+            "&redirect_uri=https://comic-web-page-psi.vercel.app/callback" +  // ✅ Must match Okta settings
+            "&state=randomState123" +
+            "&nonce=randomNonce123";
+    }
+</script>
+
 </body>
 </html>
