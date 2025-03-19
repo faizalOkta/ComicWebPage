@@ -19,15 +19,16 @@
 
     <script>
         const signIn = new OktaSignIn({
-            baseUrl: "https://demo-aquamarine-wildfowl-94995.okta.com", // Replace with your Okta domain
-            clientId: "0oapsfv2p3XXTP5o3697", // Replace with your Client ID
-            redirectUri: "https://dXXXXXXXXX.cloudfront.net", // Use your CloudFront URL
-            authParams: {
-                issuer: "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default",
-                responseType: ['token', 'id_token'],
-                display: 'page'
-            }
-        });
+    baseUrl: "https://demo-aquamarine-wildfowl-94995.okta.com",
+    clientId: "0oapsfv2p3XXTP5o3697",
+    redirectUri: "https://comic-web-page-beige.vercel.app",
+    authParams: {
+        issuer: "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default",
+        responseType: ['token', 'id_token'], // Ensure both token & id_token are allowed
+        pkce: true // Ensure PKCE is enabled
+    }
+});
+
 
         signIn.renderEl(
             { el: '#okta-login-container' },
