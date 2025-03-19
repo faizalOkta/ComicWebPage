@@ -1,0 +1,46 @@
+<!-- Login Page: login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Comic Universe</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: #fff; text-align: center; margin: 0; padding: 0; }
+        header { background-color: #e62429; padding: 20px; font-size: 24px; }
+        #okta-login-container { margin: 50px auto; width: 300px; }
+    </style>
+    <script src="https://global.oktacdn.com/okta-signin-widget/7.0.0/js/okta-sign-in.min.js"></script>
+    <link rel="stylesheet" href="https://global.oktacdn.com/okta-signin-widget/7.0.0/css/okta-sign-in.min.css" />
+</head>
+<body>
+    <header>Comic Universe - Login</header>
+    <div id="okta-login-container"></div>
+
+    <script>
+        const signIn = new OktaSignIn({
+            baseUrl: "https://demo-aquamarine-wildfowl-94995.okta.com", // Replace with your Okta domain
+            clientId: "0oapsfv2p3XXTP5o3697", // Replace with your Client ID
+            redirectUri: "https://dXXXXXXXXX.cloudfront.net", // Use your CloudFront URL
+            authParams: {
+                issuer: "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default",
+                responseType: ['token', 'id_token'],
+                display: 'page'
+            }
+        });
+
+        signIn.renderEl(
+            { el: '#okta-login-container' },
+            function success(res) {
+                if (res.status === 'SUCCESS') {
+                    console.log('User successfully authenticated', res);
+                    window.location.href = 'https://dXXXXXXXXX.cloudfront.net/index.html'; // Redirect to home after login
+                }
+            },
+            function error(err) {
+                console.error(err);
+            }
+        );
+    </script>
+</body>
+</html>
