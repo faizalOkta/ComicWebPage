@@ -10,30 +10,21 @@
         header { background-color: #e62429; padding: 20px; font-size: 24px; }
         #okta-login-container { margin: 50px auto; width: 300px; }
     </style>
-    <script src="https://global.oktacdn.com/okta-auth-js/7.2.0/okta-auth-js.min.js"></script>
 </head>
 <body>
     <header>Comic Universe - Login</header>
-    <button id="login-btn">Login</button>
+    <button onclick="redirectToOkta()">Login with Okta</button>
 
     <script>
-        const authClient = new OktaAuth({
-            issuer: "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default",
-            clientId: "0oapsfv2p3XXTP5o3697",
-            redirectUri: "https://comic-web-page-psi.vercel.app/login.html",
-            pkce: true,
-            scopes: ['openid', 'profile', 'email']
-        });
-
-        document.getElementById("login-btn").addEventListener("click", async () => {
-            try {
-                await authClient.token.getWithRedirect({
-                    responseType: ['code', 'id_token']
-                });
-            } catch (err) {
-                console.error("Login failed", err);
-            }
-        });
+        function redirectToOkta() {
+            window.location.href = "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default/v1/authorize?" +
+                "client_id=0oapsfv2p3XXTP5o3697" +
+                "&response_type=code" +
+                "&scope=openid profile email" +
+                "&redirect_uri=https://comic-web-page-psi.vercel.app/login.html" +
+                "&state=YOUR_RANDOM_STATE" +
+                "&nonce=YOUR_RANDOM_NONCE";
+        }
     </script>
 </body>
 </html>
