@@ -21,11 +21,11 @@
         const signIn = new OktaSignIn({
     baseUrl: "https://demo-aquamarine-wildfowl-94995.okta.com",
     clientId: "0oapsfv2p3XXTP5o3697",
-    redirectUri: "https://comic-web-page-beige.vercel.app",
+    redirectUri: "https://comic-web-page-cii84teu2-faizaloktas-projects.vercel.app",
     authParams: {
         issuer: "https://demo-aquamarine-wildfowl-94995.okta.com/oauth2/default",
-        responseType: ['token', 'id_token'], // Ensure both token & id_token are allowed
-        pkce: true // Ensure PKCE is enabled
+        responseType: ['token', 'id_token'],
+        pkce: true
     }
 });
 
